@@ -1,0 +1,74 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: monitor-svc
+spec:
+  selector:
+    app: monitor1
+  ports:
+  - protocol: "TCP"
+    port: 80
+    targetPort: 9999
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mmonitor1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mmonitor1
+  template:
+    metadata:
+      labels:
+        app: mmonitor1
+    spec:
+      containers:
+      - name: mmonitor-app
+        image: momodocker541/monitor_url:1
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: URL_LIST
+          value: '["https://httpstat.us/503","https://httpstat.us/200"]'
+        - name: M_PORT
+          value: '9999'
+        - name: UPDATE_PERIOD
+          value: '1'
+        ports:
+        - containerPort: 9999  
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+        livenessProbe:
+          httpGet:
+            path: /metrics
+            port: 9999
+          initialDelaySeconds: 15
+          periodSeconds: 3
+          timeoutSeconds: 5
+          failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            path: /metrics
+            port: 9999
+          initialDelaySeconds: 5
+          periodSeconds: 1
+          timeoutSeconds: 3
+          failureThreshold: 1
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: my-app-pdb
+  labels:
+    app: monitor1
+spec:
+  selector:
+    matchLabels:
+      app: monitor1
+  maxUnavailable: 1

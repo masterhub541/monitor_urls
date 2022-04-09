@@ -1,0 +1,11 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ template "monitor-url.fullname" . }}
+  labels:
+    app: {{ template "monitor-url.name" . }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ template "monitor-url.name" . }}
+{{ toYaml .Values.podDisruptionBudget | indent 2 }}

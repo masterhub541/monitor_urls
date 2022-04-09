@@ -1,0 +1,4 @@
+To access the service:
+  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app={{ template "monitor-url.name" . }}" -o jsonpath="{.items[0].metadata.name}")
+  echo "Visit http://127.0.0.1:8888 to use your application"
+  kubectl port-forward $POD_NAME 8888:9999
