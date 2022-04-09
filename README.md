@@ -64,4 +64,4 @@ Follow the steps below to run the service:
 
 [Prometheus metrics](https://github.com/masterhub541/monitor_urls/pics/Prometheus_metrics.png)
 
-[Grafana dashboard](https://github.com/masterhub541/monitor_urls/pics/Grafana_dashboard.png)
+[Grafana dashboard](https://github.com/masterhub541/monitor_urls/blob/main/pics/Grafana_dashboard.png)
