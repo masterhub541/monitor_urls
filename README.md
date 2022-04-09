@@ -60,8 +60,8 @@ Follow the steps below to run the service:
    ```
 8. Once loaded in Prometheus the metrics can be used in Grafana dashboards:
 
-[Prometheus target](https://github.com/masterhub541/monitor_urls/pics/Prometheus_metrics.png)
+[Prometheus target](https://github.com/masterhub541/monitor_urls/blob/main/pics/Prometheus_target.png)
 
-[Prometheus metrics](https://github.com/masterhub541/monitor_urls/pics/Prometheus_metrics.png)
+[Prometheus metrics](https://github.com/masterhub541/monitor_urls/blob/main/pics/Prometheus_metrics.png)
 
 [Grafana dashboard](https://github.com/masterhub541/monitor_urls/blob/main/pics/Grafana_dashboard.png)
